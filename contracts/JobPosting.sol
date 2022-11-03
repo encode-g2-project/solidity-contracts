@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: GPL-3.0
 pragma solidity ^0.8.0;
 
-import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "./JobCore.sol"; 
 
 contract FallbackHandler {
@@ -14,43 +13,36 @@ contract JobPosting is JobCore {
 
     constructor(){}
 
-    function postJob(address payable employer, uint256 amount, IERC20 token) external payable {
-        if (msg.value != 0) {
-            // eth transaction
-            (bool success, ) = employer.call{value: msg.value}("");
-            require(success, "Failed to send Ether");
-            amount = msg.value;
-        } else {
-            // erc20 tx
-            bool success = token.transferFrom(msg.sender, employer, amount);
-            require(success, "Failed to send ERC-20 Token");
-        } 
+    function publishJob(uint256 rolesToFill, uint256 bountyAmount, IERC20 token) external payable {
+        if (bountyAmount == 0)
+            require(msg.value != 0, "bounty can't be zero");
+        if (msg.value == 0)
+            require(bountyAmount != 0, "bounty can't be zero");        
 
         // saving the details in Job struct
-        bytes32 jobid = keccak256(abi.encodePacked(employer, msg.sender, amount, block.timestamp));
-        Job memory p = Job(jobid, msg.sender, msg.sender, token, amount, false);
+        bytes32 jobid = keccak256(abi.encodePacked(msg.sender, bountyAmount, block.timestamp));
+        address[] memory lApplicants = new address[](1);
+        lApplicants[0] = msg.sender;
+        Job memory p = Job(jobid, msg.sender, rolesToFill, lApplicants, token, bountyAmount, false);
         Jobs[jobid] = p;
 
         //emit event
-        emit JobSubmissionSent(jobid, amount);
+        emit JobSubmissionSent(jobid, bountyAmount);
     }
 
-    function unpostJob(bytes32 jobid) external payable onlyEmployer(jobid) {
+    function unpublishJob(bytes32 jobid) external payable onlyEmployer(jobid) {
         Job memory p = Jobs[jobid];
-        require(p.paid != true, "You have already requested a refund");
-        if (address(p.token) == address(0)) {
-            (bool success, ) = p.applicants.call{value: p.amount}("");
-            require(success, "Failed to send Ether");
-        }  else {
-            bool success = p.token.transferFrom(msg.sender, p.applicants, p.amount);
-            require(success, "Failed to send ERC-20 Token");
-        }
-
-        p.paid = true;
+        require(p.unpublished != true, "You have already unpublished this job");
+        p.unpublished = true;
         Jobs[jobid] = p;
         
+        // OR
+        // we can delete the struct, but this will be gas intensive
+        delete Jobs[jobid];
+
         //emit event
-        emit JobCancellationSent(p.jobid, p.amount);
+        emit JobCancellationSent(p.jobid, p.bountyAmount);
+
     }
 
     function getJobInfo(bytes32 jobid) external view returns (Job memory) {

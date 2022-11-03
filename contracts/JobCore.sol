@@ -9,10 +9,11 @@ contract JobCore {
     struct Job {
         bytes32 jobid;
         address employer;
-        address applicants;
+        uint256 rolesToFill;
+        address[] applicants;
         IERC20 token;
-        uint256 amount;
-        bool paid;
+        uint256 bountyAmount;
+        bool unpublished;
         // string title;
         // string description;
         // LocationSate currentState;
