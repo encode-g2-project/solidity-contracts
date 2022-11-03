@@ -15,9 +15,9 @@ contract JobPosting is JobCore {
 
     function publishJob(uint256 rolesToFill, uint256 bountyAmount, IERC20 token) external payable {
         if (bountyAmount == 0)
-            require(msg.value != 0, "bounty can't be zero");
+            require(msg.value != 0, "Bounty can't be zero");
         if (msg.value == 0)
-            require(bountyAmount != 0, "bounty can't be zero");        
+            require(bountyAmount != 0, "Bounty can't be zero");        
 
         // saving the details in Job struct
         bytes32 jobid = keccak256(abi.encodePacked(msg.sender, bountyAmount, block.timestamp));
@@ -37,8 +37,8 @@ contract JobPosting is JobCore {
         Jobs[jobid] = p;
         
         // OR
-        // we can delete the struct, but this will be gas intensive
-        delete Jobs[jobid];
+        // we can delete the struct, but this will be gas intensive & proof of unpublishing may be needed
+        // delete Jobs[jobid];
 
         //emit event
         emit JobCancellationSent(p.jobid, p.bountyAmount);
