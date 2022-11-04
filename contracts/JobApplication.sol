@@ -8,30 +8,32 @@ contract JobPosting is JobCore {
     // State public currentState;
 
     function newApplcation(bytes32 jobid) public {
+        require(!checkApplicantExists(jobid, msg.sender), "You have already made an application");
         Job memory p = Jobs[jobid];
-        address[] memory lApplicants = new address[](1);
-        lApplicants[p.applicants.length + 1] = msg.sender;
-        p = Job(jobid, msg.sender, p.rolesToFill, lApplicants, p.token, p.bountyAmount, false);
-        Jobs[jobid] = p;
-
-        // problems
-        // prevent msg.sender from applying again
-        // appending msg.sender to an existing struct will delete all other applicants
+        p.applicants[p.applicants.length + 1] = msg.sender;
+        Jobs[jobid] = Job(jobid, p.employer, p.rolesToFill, p.applicants, p.token, p.bountyAmount, p.bountySent);
     }
 
-    function getMyApplications() public {}
+    function getMyApplications() public view returns (bytes32[] memory) {}
 
     function getMyApplicants(bytes32 jobid) public view returns (address[] memory) {
         Job memory p = Jobs[jobid];
         return p.applicants;
     }
 
-    function changeApplicationStatus(address applicantAddress, bytes32 jobid, string memory status) public {}
+    function changeApplicationStatus(address applicantAddress, bytes32 jobid, string memory status) public {
+        // Several ways to do this:
+        // OPTION 1: Delcare enum state with predefined stages
+        // OPTION 2: Replace custom status with other custom status (defined by employer)
+    }
 
     function claimBounty(bytes32 jobid) public {
         Job memory p = Jobs[jobid];
         require(p.bountySent != true, "You have already requested a refund");
         
+        // TODO: Bounty needs to be split equally (e.g. bountyAmount / number_of_applicants).
+        // TODO: Bounty can be claimed at certain stage (e.g. Final interview stage).
+        // TODO: Bounty can only be claimed upon employer approval
         if (address(p.token) == address(0)) {
             (bool success, ) = address(this).call{value: p.bountyAmount}("");
             require(success, "Failed to send Ether");

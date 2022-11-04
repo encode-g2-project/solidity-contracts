@@ -20,4 +20,14 @@ contract JobCore {
     }
 
     mapping (bytes32 => Job) Jobs;
+
+    function checkApplicantExists(bytes32 jobid, address applicantAddress) internal view returns (bool){
+        Job memory p = Jobs[jobid];
+        for (uint i=0; i < p.applicants.length; i++ ) {
+            if (applicantAddress == p.applicants[i]) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
