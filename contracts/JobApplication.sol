@@ -29,7 +29,7 @@ contract JobPosting is JobCore {
 
     function claimBounty(bytes32 jobid) public {
         Job memory p = Jobs[jobid];
-        require(p.bountySent != true, "You have already requested a refund");
+        require(p.bountySent != true, "You have already claimed your bounty");
         
         // TODO: Bounty needs to be split equally (e.g. bountyAmount / number_of_applicants).
         // TODO: Bounty can be claimed at certain stage (e.g. Final interview stage).
@@ -41,10 +41,8 @@ contract JobPosting is JobCore {
             bool success = p.token.transferFrom(msg.sender, address(this), p.bountyAmount);
             require(success, "Failed to send ERC-20 Token");
         }
-
         p.bountySent = true;
-        Jobs[jobid] = p;
-        
+        //Jobs[jobid] = p;
         //emit event
         //emit BountySent(p.jobid, p.bountySent, p.applicants);
     }
