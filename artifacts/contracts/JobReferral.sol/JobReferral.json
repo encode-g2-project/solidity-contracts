@@ -1,0 +1,10 @@
+{
+  "_format": "hh-sol-artifact-1",
+  "contractName": "JobReferral",
+  "sourceName": "contracts/JobReferral.sol",
+  "abi": [],
+  "bytecode": "0x6080604052348015600f57600080fd5b50603f80601d6000396000f3fe6080604052600080fdfea2646970667358221220d5ed137200ae4b3d1b0df40a457cc3d39cab368851de8973dc73abad51e98a2064736f6c63430008000033",
+  "deployedBytecode": "0x6080604052600080fdfea2646970667358221220d5ed137200ae4b3d1b0df40a457cc3d39cab368851de8973dc73abad51e98a2064736f6c63430008000033",
+  "linkReferences": {},
+  "deployedLinkReferences": {}
+}

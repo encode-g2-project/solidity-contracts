@@ -1,0 +1,10 @@
+{
+  "_format": "hh-sol-artifact-1",
+  "contractName": "JobCore",
+  "sourceName": "contracts/JobCore.sol",
+  "abi": [],
+  "bytecode": "0x6080604052348015600f57600080fd5b50603f80601d6000396000f3fe6080604052600080fdfea2646970667358221220948c761d00853c345086a0feb54b1e37f0cb505aa176930ee6490fad97c4eb5964736f6c63430008000033",
+  "deployedBytecode": "0x6080604052600080fdfea2646970667358221220948c761d00853c345086a0feb54b1e37f0cb505aa176930ee6490fad97c4eb5964736f6c63430008000033",
+  "linkReferences": {},
+  "deployedLinkReferences": {}
+}

@@ -1,10 +1,47 @@
 {
   "_format": "hh-sol-cache-2",
   "files": {
-    "/Users/thomashumphreys/ghq/github.com/encode-g2-project/solidity-contracts/contracts/JobsCore.sol": {
-      "lastModificationDate": 1667312979745,
-      "contentHash": "052897e3dde6d74c5ab0cbaebfcf799e",
-      "sourceName": "contracts/JobsCore.sol",
+    "/Users/thomashumphreys/ghq/github.com/encode-g2-project/solidity-contracts/contracts/JobApplication.sol": {
+      "lastModificationDate": 1667578937548,
+      "contentHash": "5bad86a1d093d0dbb73e63eadd730e46",
+      "sourceName": "contracts/JobApplication.sol",
+      "solcConfig": {
+        "version": "0.8.0",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "./JobCore.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "JobPosting"
+      ]
+    },
+    "/Users/thomashumphreys/ghq/github.com/encode-g2-project/solidity-contracts/contracts/JobCore.sol": {
+      "lastModificationDate": 1667578708214,
+      "contentHash": "8d0a11a7ae45e60133c323ec508ed019",
+      "sourceName": "contracts/JobCore.sol",
       "solcConfig": {
         "version": "0.8.0",
         "settings": {
@@ -35,8 +72,7 @@
         "^0.8.0"
       ],
       "artifacts": [
-        "FallbackHandler",
-        "JobsCore"
+        "JobCore"
       ]
     },
     "/Users/thomashumphreys/ghq/github.com/encode-g2-project/solidity-contracts/node_modules/@openzeppelin/contracts/token/ERC20/IERC20.sol": {
@@ -72,6 +108,81 @@
       ],
       "artifacts": [
         "IERC20"
+      ]
+    },
+    "/Users/thomashumphreys/ghq/github.com/encode-g2-project/solidity-contracts/contracts/JobReferral.sol": {
+      "lastModificationDate": 1667578999936,
+      "contentHash": "5827a37ed21b9a89a34e6000387cbb64",
+      "sourceName": "contracts/JobReferral.sol",
+      "solcConfig": {
+        "version": "0.8.0",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "./JobCore.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "JobReferral"
+      ]
+    },
+    "/Users/thomashumphreys/ghq/github.com/encode-g2-project/solidity-contracts/contracts/JobPosting.sol": {
+      "lastModificationDate": 1667576831867,
+      "contentHash": "d8622d04af75a2ca297b287249c9b5a4",
+      "sourceName": "contracts/JobPosting.sol",
+      "solcConfig": {
+        "version": "0.8.0",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "./JobCore.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "FallbackHandler",
+        "JobPosting"
       ]
     },
     "/Users/thomashumphreys/ghq/github.com/encode-g2-project/solidity-contracts/node_modules/@openzeppelin/contracts/token/ERC20/extensions/IERC20Metadata.sol": {

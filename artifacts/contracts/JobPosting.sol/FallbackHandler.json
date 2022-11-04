@@ -1,0 +1,15 @@
+{
+  "_format": "hh-sol-artifact-1",
+  "contractName": "FallbackHandler",
+  "sourceName": "contracts/JobPosting.sol",
+  "abi": [
+    {
+      "stateMutability": "nonpayable",
+      "type": "fallback"
+    }
+  ],
+  "bytecode": "0x6080604052348015600f57600080fd5b50604880601d6000396000f3fe6080604052348015600f57600080fd5b5000fea2646970667358221220cbb915e8fc40648c913784deb265a13c6038ad413de98f84175626077e83ad0f64736f6c63430008000033",
+  "deployedBytecode": "0x6080604052348015600f57600080fd5b5000fea2646970667358221220cbb915e8fc40648c913784deb265a13c6038ad413de98f84175626077e83ad0f64736f6c63430008000033",
+  "linkReferences": {},
+  "deployedLinkReferences": {}
+}
