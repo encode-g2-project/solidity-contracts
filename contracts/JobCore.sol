@@ -13,7 +13,7 @@ contract JobCore {
         address[] applicants;
         IERC20 token;
         uint256 bountyAmount;
-        bool unpublished;
+        bool bountySent;
         // string title;
         // string description;
         // LocationSate currentState;

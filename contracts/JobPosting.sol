@@ -8,8 +8,8 @@ contract FallbackHandler {
 }
 
 contract JobPosting is JobCore {
-    event JobSubmissionSent(bytes32 indexed jobid, uint256 indexed amount);
-    event JobCancellationSent(bytes32 indexed jobid, uint256 indexed amount);
+    event JobPublished(bytes32 indexed jobid, uint256 indexed amount);
+    event JobUnpublished(bytes32 indexed jobid, address indexed employer);
 
     constructor(){}
 
@@ -27,22 +27,15 @@ contract JobPosting is JobCore {
         Jobs[jobid] = p;
 
         //emit event
-        emit JobSubmissionSent(jobid, bountyAmount);
+        emit JobPublished(jobid, bountyAmount);
     }
 
     function unpublishJob(bytes32 jobid) external payable onlyEmployer(jobid) {
+        delete Jobs[jobid];
         Job memory p = Jobs[jobid];
-        require(p.unpublished != true, "You have already unpublished this job");
-        p.unpublished = true;
-        Jobs[jobid] = p;
-        
-        // OR
-        // we can delete the struct, but this will be gas intensive & proof of unpublishing may be needed
-        // delete Jobs[jobid];
 
         //emit event
-        emit JobCancellationSent(p.jobid, p.bountyAmount);
-
+        emit JobUnpublished(p.jobid, p.employer);
     }
 
     function getJobInfo(bytes32 jobid) external view returns (Job memory) {
